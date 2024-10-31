@@ -12,12 +12,18 @@ const getArticles = async (req, res) => {
             res.status(404).json({ message: "User not found" });
             return;
         }
+
         const userPreferences = user.preferences;
 
         const articles = await Article.find({
             $and: [
-                { tags: { $in: userPreferences } },
-                { blockedBy: { $ne: userId } }
+                {
+                    $or: [
+                        { tags: { $in: userPreferences } },  
+                        { category: { $in: userPreferences } } 
+                    ]
+                },
+                { blockedBy: { $ne: userId } } 
             ]
         }).populate('author', 'firstName lastName');
 
@@ -38,6 +44,7 @@ const getArticles = async (req, res) => {
         res.status(500).json({ success: false, message: 'Server error' });
     }
 };
+
 
 const likeArticle = async (req, res) => {
     const { articleId } = req.body;
