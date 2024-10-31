@@ -2,7 +2,7 @@
 const User = require("../model/userModal");
 const { createActivationToken, generateAccessToken, generateRefreshToken, verifyActivationToken } = require("../utils/tokenUtils");
 const bcrypt = require("bcryptjs");
-const { sendEmail } = require("../utils/emailService");
+const  sendEmail  = require("../utils/emailService");
 
 exports.registerUser = async (req, res) => {
   const { firstName, lastName, phone, email, dob, password, preferences } = req.body;
