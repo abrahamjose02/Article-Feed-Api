@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const {Article} = require("../model/articleModal");
 const User = require("../model/userModal");
-const { uploadImageToS3 } = require("../utils/s3Uploader");
+const  uploadImageToS3  = require("../utils/s3Uploader");
 
 const getArticles = async (req, res) => {
     const userId = req.user?.id;
